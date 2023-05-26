@@ -366,7 +366,7 @@ describe("calcite-combobox", () => {
 
   describe("item selection", () => {
     describe("toggling items", () => {
-      it("single-selection mode allows toggling selection once the selected item is clicked", async () => {
+      it("single-selection mode does not allow toggling selection once the selected item is clicked", async () => {
         const page = await newE2EPage();
         await page.setContent(
           html`
@@ -391,7 +391,7 @@ describe("calcite-combobox", () => {
         await secondOpenEvent;
 
         await item1.click();
-        expect(await combobox.getProperty("value")).toBe("");
+        expect(await combobox.getProperty("value")).toBe("one");
       });
 
       it("multiple-selection mode allows toggling selection once the selected item is clicked", async () => {

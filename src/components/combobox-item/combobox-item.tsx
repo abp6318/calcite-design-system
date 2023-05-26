@@ -128,7 +128,9 @@ export class ComboboxItem implements ConditionalSlotComponent, InteractiveCompon
   // --------------------------------------------------------------------------
 
   toggleSelected(): Promise<void> {
-    if (this.disabled) {
+    const isSingleSelect = getElementProp(this.el, "selection-mode", "multiple") === "single";
+
+    if (this.disabled || (isSingleSelect && this.selected)) {
       return;
     }
 
