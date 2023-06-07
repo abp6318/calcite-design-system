@@ -7,6 +7,8 @@ src\components\block\assets\block\t9n
 src\components\block-section\assets\block-section\t9n
 src\components\button\assets\button\t9n
 src\components\card\assets\card\t9n
+src\components\carousel\assets\carousel\t9n
+src\components\carousel-item\assets\carousel-item\t9n
 src\components\chip\assets\chip\t9n
 src\components\color-picker\assets\color-picker\t9n
 src\components\combobox\assets\combobox\t9n
