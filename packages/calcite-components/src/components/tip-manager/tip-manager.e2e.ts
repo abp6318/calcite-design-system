@@ -156,8 +156,8 @@ describe("calcite-tip-manager", () => {
       const nextButton = await page.find(`calcite-tip-manager >>> .${CSS.pageNext}`);
       await nextButton.click();
 
-      const sharedtitleNode = await page.find(`calcite-tip-manager >>> .${CSS.heading}`);
-      expect(sharedtitleNode.innerText).toBe(sharedTitle);
+      const sharedTitleNode = await page.find(`calcite-tip-manager >>> .${CSS.heading}`);
+      expect(sharedTitleNode.innerText).toBe(sharedTitle);
 
       await nextButton.click();
 
