@@ -12,10 +12,14 @@
     border
     border-solid
     shadow-none
-    duration-150
-    ease-in-out
     overflow-hidden;
     border-radius: var(--calcite-border-radius-base);
+    &:not(.non-interactive) {
+      @apply focus-base;
+    }
+    &:not(.non-interactive):focus {
+      @apply focus-outset;
+    }
   }
 }
 
@@ -34,15 +38,17 @@
     items-center;
 }
 
-.header,
 .footer {
   @apply flex px-3 pt-3 pb-1;
 }
 
 .header {
-  @apply flex-col;
+  @apply flex flex-row;
 }
 
+.header-text-container {
+  @apply flex flex-col px-3 py-2 w-full justify-center;
+}
 .footer {
   @apply mt-auto flex-row content-between
     justify-between
@@ -52,35 +58,27 @@
 }
 
 .card-content {
-  @apply text-color-3
-    text-n2-wrap
-    p-3;
+  @apply h-auto p-3 text-n2-wrap;
+  &.content-slotted {
+  }
 }
 
 :host([selected]) .calcite-card-container {
-  @apply border-color-brand;
+  box-shadow: inset 0 -4px 0 0 var(--calcite-ui-brand);
 }
 
 // slotted content
-@include slotted("title", "*") {
+@include slotted("heading", "*") {
   @apply text-color-1
     text-n1-wrap
     m-0
     font-medium;
 }
 
-:host([selectable]) {
-  .header {
-    // prevents overlap with checkbox (default header padding + no-overlap spacing)
-    padding-inline-end: theme("spacing.8");
-  }
-}
-
-@include slotted("subtitle", "*") {
+@include slotted("description", "*") {
   @apply text-color-2
     text-n2-wrap
     m-0
-    mt-2
     font-normal;
 }
 
@@ -97,9 +95,11 @@
 }
 
 .checkbox-wrapper {
-  @apply absolute m-0 p-0;
-  inset-block-start: theme("spacing.2");
-  inset-inline-end: theme("spacing.2");
+  margin: 0.25rem;
+}
+:host([selected]) .checkbox-wrapper {
+  --calcite-ui-icon-color: var(--calcite-ui-brand);
+  --calcite-ui-border-3: var(--calcite-ui-brand);
 }
 
 .thumbnail-wrapper {
