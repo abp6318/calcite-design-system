@@ -1,5 +1,5 @@
-:host {
-  @apply bg-foreground-1
+.container {
+  @apply w-full p-4 
     text-color-2
     text-n1h
     relative
@@ -7,14 +7,10 @@
     box-border
     flex
     flex-row;
-
+  border: 1px solid red;
   * {
     @apply box-border;
   }
-}
-
-.container {
-  @apply w-full p-4;
 }
 
 :host([selected]) .container {
@@ -36,25 +32,4 @@
 
 .content {
   @apply flex;
-}
-
-.info {
-  @apply py-0 px-4;
-  inline-size: 70%;
-  &:only-child {
-    @apply w-full px-0;
-  }
-}
-
-::slotted(p) {
-  @apply mt-0;
-}
-
-::slotted(a) {
-  @apply focus-base;
-  color: theme("backgroundColor.brand");
-}
-
-::slotted(a:focus) {
-  @apply focus-outset;
 }

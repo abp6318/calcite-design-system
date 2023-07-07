@@ -12,6 +12,7 @@ import {
 import { HeadingLevel } from "../functional/Heading";
 import { CarouselMessages } from "./assets/carousel/t9n";
 import { CSS, ICONS } from "./resources";
+import { Scale } from "../interfaces";
 
 /**
  * @slot - A slot for adding `calcite-carousel-item`s.
@@ -59,12 +60,15 @@ export class Carousel {
   /**
    * control how the dots are displayed - top, bottom, start, end (automatically positions vertically / horizontally)
    */
-  @Prop() controlPosition?: string = "default";
+  @Prop() controlPosition?: "start" | "end" | "top" | "bottom" = "bottom";
 
   /**
    * control if the displayed control are dot, or bar
    */
   @Prop() controlType?: "dot" | "bar" = "dot";
+
+  /** Specifies the size of the component. */
+  @Prop({ reflect: true }) scale: Scale = "m";
 
   // --------------------------------------------------------------------------
   //
@@ -252,7 +256,7 @@ export class Carousel {
               : ICONS.chevronRight
           }
           onClick={this.previousClicked}
-          scale="m"
+          scale={this.scale}
           text={previousLabel}
         />
         {this.tips.map((tip, index) => (
@@ -266,13 +270,17 @@ export class Carousel {
             >
               {this.controlType !== "bar" && (
                 <calcite-action
-                  active={index === selectedIndex}
-                  icon={index === selectedIndex ? "circle-f" : "circle"}
+                  scale={this.scale}
+                  icon={index === selectedIndex ? "square-f" : "square-area"}
                   text={previousLabel}
                 />
               )}
             </div>
-            <calcite-tooltip label="Slide Title" reference-element={`${guid}-${index}`}>
+            <calcite-tooltip
+              label="Slide Title"
+              reference-element={`${guid}-${index}`}
+              placement="bottom"
+            >
               Slide title / label: {tip.label}
             </calcite-tooltip>
           </Fragment>
@@ -287,7 +295,7 @@ export class Carousel {
               : ICONS.chevronLeft
           }
           onClick={this.nextClicked}
-          scale="m"
+          scale={this.scale}
           text={nextLabel}
         />
       </div>

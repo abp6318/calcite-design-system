@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Carousel</title>
-
     <style>
       .parent {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        margin: 25px 0;
+        padding: 25px 0;
+        justify-content: center;
       }
 
       .child {
-        flex: 0 1 50%;
-        margin: 0 25px;
+        flex: 1 0 21%;
+        padding: 0 25px;
         color: var(--calcite-ui-text-3);
         font-family: var(--calcite-sans-family);
         font-size: var(--calcite-font-size-0);
@@ -23,203 +25,122 @@
 
       .right-aligned-text {
         text-align: right;
-        flex: 0 0 15%;
-      }
-
-      hr {
-        margin: 60px 0;
-        border-top: 1px solid var(--calcite-ui-border-2);
       }
     </style>
-
-    <script src="./_assets/head.js"></script>
+    <script src="_assets/head.js"></script>
+    <script type="module" src="./_assets/demo-form.js"></script>
+    <script type="module" src="./_assets/demo-spacer.js"></script>
   </head>
 
   <body>
-    <div class="parent">
-      <div class="child">
-        <calcite-carousel>
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
+    <demo-dom-swapper>
+      <h1 style="margin: 0 auto; text-align: center">Checkbox</h1>
+      <div class="parent">
+        <div class="child">
+          <div style="display: flex; flex-direction: row; gap: 1rem">
+            <calcite-label
+              >controlOverlay
+              <calcite-switch id="switch-overlay"></calcite-switch>
+            </calcite-label>
+            <calcite-label
+              >controlPosition
+              <calcite-segmented-control id="control-position">
+                <calcite-segmented-control-item value="start">Start</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="end">End</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="top">Top</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="bottom" checked>Bottom</calcite-segmented-control-item>
+              </calcite-segmented-control>
+            </calcite-label>
+            <calcite-label
+              >controlType
+              <calcite-segmented-control id="control-type">
+                <calcite-segmented-control-item value="dot" checked>Dot</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="bar">Bar</calcite-segmented-control-item>
+              </calcite-segmented-control>
+            </calcite-label>
+            <calcite-label
+              >scale
+              <calcite-segmented-control id="control-scale">
+                <calcite-segmented-control-item value="s">s</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="m" checked> m</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="l"> l</calcite-segmented-control-item>
+              </calcite-segmented-control>
+            </calcite-label>
+          </div>
+        </div>
+        <div class="parent">
+          <div class="child">
+            <calcite-carousel id="example-carousel">
+              <calcite-carousel-item heading="The Red Rocks and Blue Water">
+                <p>
+                  This tip is how a tip should really look. It has a landscape or square image and a small amount of
+                  text content. This paragraph is in an "info" slot.
+                </p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="The Long Trees">
+                <p>
+                  This tip has an image that is a pretty tall. And the text will run out before the end of the image.
+                </p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="Square Nature">
+                <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="The lack of imagery">
+                <p>
+                  This is the next paragraph and should show how wide the content area is now. Of course, the width of
+                  the overall tip will affect things. In astronomy, the terms object and body are often used
+                  interchangeably.
+                </p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="The Red Rocks and Blue Water">
+                <p>
+                  This tip is how a tip should really look. It has a landscape or square image and a small amount of
+                  text content. This paragraph is in an "info" slot.
+                </p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="The Long Trees">
+                <p>
+                  This tip has an image that is a pretty tall. And the text will run out before the end of the image.
+                </p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="Square Nature">
+                <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
+              </calcite-carousel-item>
+              <calcite-carousel-item heading="The lack of imagery">
+                <p>
+                  This is the next paragraph and should show how wide the content area is now. Of course, the width of
+                  the overall tip will affect things. In astronomy, the terms object and body are often used
+                  interchangeably.
+                </p>
+              </calcite-carousel-item>
+            </calcite-carousel>
+          </div>
+        </div>
       </div>
-      <div class="child">
-        <calcite-carousel control-position="top">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-    </div>
-    <div class="parent">
-      <div class="child">
-        <calcite-carousel control-position="start">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-      <div class="child">
-        <calcite-carousel control-position="end">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-    </div>
-    <h3>Type: bar</h3>
-    <div class="parent">
-      <div class="child">
-        <calcite-carousel control-type="bar">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-      <div class="child">
-        <calcite-carousel control-position="top" control-overlay control-type="bar">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-    </div>
-    <div class="parent">
-      <div class="child">
-        <calcite-carousel control-position="start" control-overlay control-type="bar">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-      <div class="child">
-        <calcite-carousel control-position="end" control-overlay control-type="bar">
-          <calcite-carousel-item heading="The Red Rocks and Blue Water">
-            <p>
-              This tip is how a tip should really look. It has a landscape or square image and a small amount of text
-              content. This paragraph is in an "info" slot.
-            </p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The Long Trees">
-            <p>This tip has an image that is a pretty tall. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="Square Nature">
-            <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
-          </calcite-carousel-item>
-          <calcite-carousel-item heading="The lack of imagery">
-            <p>
-              This is the next paragraph and should show how wide the content area is now. Of course, the width of the
-              overall tip will affect things. In astronomy, the terms object and body are often used interchangeably.
-            </p>
-          </calcite-carousel-item>
-        </calcite-carousel>
-      </div>
-    </div>
+      <script>
+        const carousel = document.getElementById("example-carousel");
+
+        const switchOverlay = document.getElementById("switch-overlay");
+        const controlScale = document.getElementById("control-scale");
+        const controlPosition = document.getElementById("control-position");
+        const controlType = document.getElementById("control-type");
+
+        switchOverlay.addEventListener("calciteSwitchChange", function () {
+          carousel.controlOverlay = event.target.checked;
+        });
+
+        controlScale.addEventListener("calciteSegmentedControlChange", function () {
+          carousel.scale = event.target.value;
+        });
+
+        controlPosition.addEventListener("calciteSegmentedControlChange", function () {
+          carousel.controlPosition = event.target.value;
+        });
+
+        controlType.addEventListener("calciteSegmentedControlChange", function () {
+          carousel.controlType = event.target.value;
+        });
+      </script>
+    </demo-dom-swapper>
   </body>
 </html>

@@ -7,11 +7,12 @@
  * @prop --calcite-carousel-item-max-width: the maximum width of a slotted tip within tip-manager
  */
 
-:host {
+.container {
   @apply bg-foreground-1
   text-color-2
   text-n1h
   box-border
+  w-full
   block;
 
   * {
@@ -22,7 +23,9 @@
 }
 
 :host([closed]) {
-  @apply hidden;
+  .container {
+    @apply hidden;
+  }
 }
 
 @import "../../assets/styles/header";
@@ -80,6 +83,7 @@
     items-start
     justify-center
     overflow-auto
+    flex-auto
     p-4;
   animation-name: none;
   animation-duration: var(--calcite-animation-timing);
@@ -111,20 +115,27 @@
   &.is-overlay {
     // absolute
     position: absolute;
-    inline-size: 100%;
+    inset-inline-start: 0;
   }
   &.is-bar {
-    gap: 4px;
+    gap: 8px;
   }
 }
 
 .is-bar .pagination-item {
   display: flex;
   inline-size: 24px;
-  block-size: 24px;
-  background-color: lightblue;
+  block-size: 8px;
+  cursor: pointer;
+  background-color: var(--calcite-ui-border-3);
   &.active-icon {
-    background-color: blue;
+    background-color: var(--calcite-ui-brand);
+  }
+}
+.pagination-item {
+  --calcite-ui-icon-color: var(--calcite-ui-border-input);
+  &.active-icon {
+    --calcite-ui-icon-color: var(--calcite-ui-brand);
   }
 }
 .page-position {
