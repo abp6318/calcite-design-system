@@ -8,6 +8,7 @@
     "build": "rimraf dist && npm run util:patch-jsx-import && npm run compile",
     "clean": "rimraf dist node_modules .turbo",
     "compile": "npm run tsc",
+    "lint": "eslint --ext .ts --fix . && prettier --write \"support/*.ts\" >/dev/null",
     "tsc": "tsc",
     "util:patch-jsx-import": "ts-node --esm ./support/patchImportPathJSX.ts"
   },
@@ -18,11 +19,17 @@
     "dist/"
   ],
   "dependencies": {
-    "@esri/calcite-components": "^1.5.0-next.11"
+    "@esri/calcite-components": "^1.5.0-next.11",
+    "eslint-config-calcite": "*",
+    "tsconfig": "*"
   },
   "peerDependencies": {
     "react": ">=16.7",
     "react-dom": ">=16.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esri/calcite-design-system.git"
   },
   "volta": {
     "extends": "../../package.json"

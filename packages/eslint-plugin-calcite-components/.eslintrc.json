@@ -1,5 +1,5 @@
 {
   "root": true,
   "extends": ["calcite"],
-  "ignorePatterns": ["dist", "src"]
+  "ignorePatterns": ["dist"]
 }

@@ -1,0 +1,16 @@
+{
+  "name": "eslint-config-calcite",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Shared ESLint configuration for use in multiple packages",
+  "main": "index.js",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "5.60.1",
+    "@typescript-eslint/parser": "5.48.2",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsdoc": "46.2.6",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-unicorn": "46.0.0"
+  }
+}

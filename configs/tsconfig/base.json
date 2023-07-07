@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
@@ -13,5 +14,6 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h"
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }

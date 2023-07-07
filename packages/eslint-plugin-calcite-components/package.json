@@ -8,10 +8,13 @@
   ],
   "scripts": {
     "build": "rollup --config rollup.config.ts --configPlugin typescript",
+    "lint": "eslint --ext .ts,.tsx --fix . && prettier --write \"**/*.ts?(x)\" >/dev/null",
     "test": "jest"
   },
   "dependencies": {
-    "stencil-eslint-core": "0.3.1"
+    "stencil-eslint-core": "0.3.1",
+    "eslint-config-calcite": "*",
+    "tsconfig": "*"
   },
   "peerDependencies": {
     "eslint": "^8"
@@ -20,8 +23,11 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@8.19.4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esri/calcite-design-system.git"
+  },
   "volta": {
-    "node": "16.20.0"
+    "extends": "../../package.json"
   }
 }

@@ -1,23 +1,16 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "tsconfig/base.json",
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "lib": ["dom", "es2015"],
-    "module": "esnext",
-    "moduleResolution": "node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "outDir": "dist",
     "removeComments": false,
-    "jsx": "react",
-    "target": "es2015",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsxFactory": "React.createElement"
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
