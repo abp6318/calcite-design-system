@@ -8,6 +8,7 @@ import {
   Method,
   Prop,
   State,
+  VNode,
   Watch,
 } from "@stencil/core";
 import { connectForm, disconnectForm, FormComponent, HiddenFormInputSlot } from "../../utils/form";
@@ -35,7 +36,7 @@ import {
 } from "../../utils/t9n";
 import { Scale } from "../interfaces";
 import { RatingMessages } from "./assets/rating/t9n";
-import { StarIcon } from "./function/star";
+import { StarIcon } from "./functional/star";
 import { Star } from "./interfaces";
 
 @Component({
@@ -189,12 +190,53 @@ export class Rating
   async componentWillLoad(): Promise<void> {
     await setUpMessages(this);
     setUpLoadableComponent(this);
-    this.inputRefs = Array(this.max);
   }
 
-  componentWillRender(): void {
-    this.starsMap = Array.from({ length: this.max }, (_, i) => {
-      const value = i + 1;
+  componentDidLoad(): void {
+    setComponentLoaded(this);
+  }
+
+  disconnectedCallback(): void {
+    disconnectInteractive(this);
+    disconnectLocalized(this);
+    disconnectMessages(this);
+    disconnectLabel(this);
+    disconnectForm(this);
+  }
+
+  componentDidRender(): void {
+    updateHostInteraction(this);
+  }
+
+  render(): VNode {
+    return (
+      <Host
+        onBlur={this.handleRatingFocusLeave}
+        onFocus={this.handleRatingFocusIn}
+        onKeyDown={this.handleHostKeyDown}
+        onPointerOut={this.handleRatingPointerOut}
+        onPointerOver={this.handleRatingPointerOver}
+      >
+        <span class="wrapper">
+          <fieldset class="fieldset" disabled={this.disabled}>
+            <legend class="visually-hidden">{this.messages.rating}</legend>
+            {this.renderStars()}
+            {(this.count || this.average) && this.showChip ? (
+              <calcite-chip scale={this.scale} value={this.count?.toString()}>
+                {!!this.average && <span class="number--average">{this.average.toString()}</span>}
+                {!!this.count && <span class="number--count">({this.count?.toString()})</span>}
+              </calcite-chip>
+            ) : null}
+          </fieldset>
+          <HiddenFormInputSlot component={this} />
+        </span>
+      </Host>
+    );
+  }
+
+  private renderStars(): VNode[] {
+    return Array.from({ length: this.max }, (_, index) => {
+      const value = index + 1;
       const average =
         !this.focusValue &&
         !this.hoverValue &&
@@ -215,119 +257,74 @@ export class Rating
         fraction < 1;
       const selected = this.value >= value;
 
-      return {
+      return this.renderStar({
         average,
         checked,
         focused,
         fraction,
         hovered,
         id,
-        idx: i,
+        index,
         partial,
         selected,
         value,
-      };
+      });
     });
   }
 
-  componentDidLoad(): void {
-    setComponentLoaded(this);
-  }
-
-  disconnectedCallback(): void {
-    disconnectInteractive(this);
-    disconnectLocalized(this);
-    disconnectMessages(this);
-    disconnectLabel(this);
-    disconnectForm(this);
-  }
-
-  componentDidRender(): void {
-    updateHostInteraction(this);
-  }
-
-  render() {
+  private renderStar({
+    average,
+    checked,
+    focused,
+    fraction,
+    hovered,
+    id,
+    index,
+    partial,
+    selected,
+    value,
+  }: Star): VNode {
     return (
-      <Host
-        onBlur={this.handleRatingFocusLeave}
-        onFocus={this.handleRatingFocusIn}
-        onKeyDown={this.handleHostKeyDown}
-        onPointerOut={this.handleRatingPointerOut}
-        onPointerOver={this.handleRatingPointerOver}
+      <label
+        class={{
+          star: true,
+          focused,
+          selected,
+          hovered,
+          average,
+          partial,
+        }}
+        htmlFor={id}
+        onPointerDown={this.handleLabelPointerDown}
+        onPointerOver={this.handleLabelPointerOver}
       >
-        <span class="wrapper">
-          <fieldset class="fieldset" disabled={this.disabled}>
-            <legend class="visually-hidden">{this.messages.rating}</legend>
-            {this.starsMap.map(
-              ({
-                average,
-                checked,
-                focused,
-                fraction,
-                hovered,
-                id,
-                idx,
-                partial,
-                selected,
-                value,
-              }) => {
-                return (
-                  <label
-                    class={{
-                      star: true,
-                      focused,
-                      selected,
-                      hovered,
-                      average,
-                      partial,
-                    }}
-                    htmlFor={id}
-                    onPointerDown={this.handleLabelPointerDown}
-                    onPointerOver={this.handleLabelPointerOver}
-                  >
-                    <input
-                      checked={checked}
-                      class="visually-hidden"
-                      disabled={this.disabled || this.readOnly}
-                      id={id}
-                      name={this.guid}
-                      onChange={this.handleInputChange}
-                      onKeyDown={this.handleInputKeyDown}
-                      type="radio"
-                      value={value}
-                      // eslint-disable-next-line react/jsx-sort-props
-                      ref={(el) => {
-                        this.inputRefs[idx] = el;
-                        return (
-                          (value === 1 || value === this.value) &&
-                          (this.inputFocusRef = el as HTMLInputElement)
-                        );
-                      }}
-                    />
-                    <StarIcon full={selected || average} scale={this.scale} />
-                    {partial && (
-                      <div class="fraction" style={{ width: `${fraction * 100}%` }}>
-                        <StarIcon full partial scale={this.scale} />
-                      </div>
-                    )}
-                    <span class="visually-hidden">
-                      {this.messages.stars.replace("{num}", `${value}`)}
-                    </span>
-                  </label>
-                );
-              }
-            )}
+        <input
+          checked={checked}
+          class="visually-hidden"
+          disabled={this.disabled || this.readOnly}
+          id={id}
+          name={this.guid}
+          onChange={this.handleInputChange}
+          onKeyDown={this.handleInputKeyDown}
+          type="radio"
+          value={value}
+          // eslint-disable-next-line react/jsx-sort-props
+          ref={(el) => {
+            this.inputRefs[index] = el;
 
-            {(this.count || this.average) && this.showChip ? (
-              <calcite-chip scale={this.scale} value={this.count?.toString()}>
-                {!!this.average && <span class="number--average">{this.average.toString()}</span>}
-                {!!this.count && <span class="number--count">({this.count?.toString()})</span>}
-              </calcite-chip>
-            ) : null}
-          </fieldset>
-          <HiddenFormInputSlot component={this} />
-        </span>
-      </Host>
+            if (value === 1 || value === this.value) {
+              this.inputFocusRef = el as HTMLInputElement;
+            }
+          }}
+        />
+        <StarIcon full={selected || average} scale={this.scale} />
+        {partial && (
+          <div class="fraction" style={{ width: `${fraction * 100}%` }}>
+            <StarIcon full partial scale={this.scale} />
+          </div>
+        )}
+        <span class="visually-hidden">{this.messages.stars.replace("{num}", `${value}`)}</span>
+      </label>
     );
   }
 
@@ -466,13 +463,11 @@ export class Rating
 
   private guid = `calcite-ratings-${guid()}`;
 
-  private inputRefs: HTMLInputElement[];
+  private inputRefs: HTMLInputElement[] = [];
 
   private inputFocusRef: HTMLInputElement;
 
   private isKeyboardInteraction = true;
 
   private max = 5;
-
-  private starsMap: Star[];
 }
