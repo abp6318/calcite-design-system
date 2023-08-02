@@ -778,14 +778,14 @@ describe("calcite-slider", () => {
 
   describe("number locale support", () => {
     let page: E2EPage;
+    let slider: E2EElement;
     let noSeparator: string[];
+    let withSeparator: string[];
+
     const expectedNotSeparatedValueArray = {
       en: ["2500", "500000.5", "1000", "1000000.5"],
       fr: ["2500", "500000,5", "1000", "1000000,5"],
     };
-    let withSeparator: string[];
-    let getDisplayedValuesArray;
-    let element: E2EElement;
     const formattedValuesPerLanguageObject = {
       "de-CH": ["2’500", "500’000.5", "1’000", "1’000’000.5"],
       en: ["2,500", "500,000.5", "1,000", "1,000,000.5"],
@@ -793,6 +793,22 @@ describe("calcite-slider", () => {
       fr: ["2 500", "500 000,5", "1 000", "1 000 000,5"],
       hi: ["2,500", "5,00,000.5", "1,000", "10,00,000.5"],
     };
+
+    async function getDisplayedValuesArray(page: E2EPage): Promise<string[]> {
+      return page.$eval(
+        "calcite-slider",
+        (slider: HTMLCalciteSliderElement, css: typeof CSS) => {
+          const labelMinVal = slider.shadowRoot.querySelector<HTMLElement>(`.${css.handleLabelMinValue}`);
+          const labelVal = slider.shadowRoot.querySelector<HTMLElement>(`.${css.handleLabelValue}`);
+
+          const tickMin = slider.shadowRoot.querySelector<HTMLElement>(`.${css.tickMin}`);
+          const tickMax = slider.shadowRoot.querySelector<HTMLElement>(`.${css.tickMax}`);
+
+          return [labelMinVal.innerText, labelVal.innerText, tickMin.innerText, tickMax.innerText];
+        },
+        CSS
+      );
+    }
 
     beforeEach(async () => {
       page = await newE2EPage();
@@ -810,47 +826,30 @@ describe("calcite-slider", () => {
         style="width:${sliderWidthFor1To1PixelValueTrack}"
       >
       </calcite-slider>`);
-      element = await page.find("calcite-slider");
-
-      getDisplayedValuesArray = async (): Promise<string[]> => {
-        const labelMinVal = (await element.shadowRoot.querySelector(`.${CSS.handleLabelMinValue}`)) as HTMLElement;
-        const labelVal = (await element.shadowRoot.querySelector(`.${CSS.handleLabelValue}`)) as HTMLElement;
-
-        const tickMin = (await element.shadowRoot.querySelector(`.${CSS.tickMin}`)) as HTMLElement;
-        const tickMax = (await element.shadowRoot.querySelector(`.${CSS.tickMax}`)) as HTMLElement;
-
-        return [labelMinVal.innerText, labelVal.innerText, tickMin.innerText, tickMax.innerText];
-      };
-      await page.exposeFunction("getDisplayedValuesArray", getDisplayedValuesArray);
+      slider = await page.find("calcite-slider");
     });
 
     it("does not render separated when groupSeparator prop is false", async () => {
-      element.setProperty("groupSeparator", false);
+      slider.setProperty("groupSeparator", false);
       await page.waitForChanges();
 
-      noSeparator = await page.$eval("calcite-slider", async (): Promise<string[]> => {
-        return await getDisplayedValuesArray();
-      });
-      expect(await element.getProperty("groupSeparator")).toBe(false);
+      noSeparator = await getDisplayedValuesArray(page);
+      expect(await slider.getProperty("groupSeparator")).toBe(false);
       expect(noSeparator).toEqual(expectedNotSeparatedValueArray.en);
 
-      element.setProperty("lang", "fr");
+      slider.setProperty("lang", "fr");
       await page.waitForChanges();
 
-      noSeparator = await page.$eval("calcite-slider", async (): Promise<string[]> => {
-        return await getDisplayedValuesArray();
-      });
+      noSeparator = await getDisplayedValuesArray(page);
       expect(noSeparator).toEqual(expectedNotSeparatedValueArray.fr);
     });
 
     it("displays group separator for multiple locales", async () => {
       const testLocalizedGroupSeparator = async (lang: string, formattedValuesArr: string[]): Promise<void> => {
-        element.setProperty("lang", lang);
+        slider.setProperty("lang", lang);
         await page.waitForChanges();
 
-        withSeparator = await page.$eval("calcite-slider", async (): Promise<string[]> => {
-          return await getDisplayedValuesArray();
-        });
+        withSeparator = await getDisplayedValuesArray(page);
         expect(withSeparator).toEqual(formattedValuesArr);
       };
 
