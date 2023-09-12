@@ -26,6 +26,44 @@
       .right-aligned-text {
         text-align: right;
       }
+
+      calcite-shell {
+        border-left: 1px solid var(--calcite-ui-border-3);
+        border-right: 1px solid var(--calcite-ui-border-3);
+        position: relative;
+        width: 80vw;
+        margin: 1rem auto;
+        height: 90vh;
+      }
+
+      calcite-popover {
+        width: 80%;
+        min-width: 300px;
+      }
+
+      calcite-carousel-item calcite-icon {
+        margin: 2rem auto 1.5rem;
+        display: block;
+      }
+
+      calcite-carousel-item p:not(.bg-image-example) {
+        text-align: center;
+        min-height: 100px;
+        max-width: 70%;
+        margin: 0 auto;
+      }
+
+      .bg-image-example {
+        background-image: url("https://placebear.com/3000/2000");
+        background-size: cover;
+        padding: 1rem;
+        height: 300px;
+        margin: 0;
+        font-size: 32px;
+        color: white;
+        font-weight: 600;
+        line-height: 32px;
+      }
     </style>
     <script src="_assets/head.js"></script>
     <script type="module" src="./_assets/demo-form.js"></script>
@@ -43,10 +81,12 @@
               <calcite-switch id="switch-overlay"></calcite-switch>
             </calcite-label>
             <calcite-label
+              >displayArrows
+              <calcite-switch id="switch-arrows"></calcite-switch>
+            </calcite-label>
+            <calcite-label
               >controlPosition
               <calcite-segmented-control id="control-position">
-                <calcite-segmented-control-item value="start">Start</calcite-segmented-control-item>
-                <calcite-segmented-control-item value="end">End</calcite-segmented-control-item>
                 <calcite-segmented-control-item value="top">Top</calcite-segmented-control-item>
                 <calcite-segmented-control-item value="bottom" checked>Bottom</calcite-segmented-control-item>
               </calcite-segmented-control>
@@ -115,18 +155,149 @@
               </calcite-carousel-item>
             </calcite-carousel>
           </div>
+          <div class="child">
+            <calcite-shell>
+              <calcite-panel heading="Content">
+                <calcite-button style="margin: 1rem" id="example-popover">Launch onboarding</calcite-button>
+                <calcite-popover open reference-element="example-popover" heading="Welcome to the show!" closable>
+                  <calcite-carousel id="example-carousel" display-arrows>
+                    <calcite-carousel-item label="The Red Rocks and Blue Water">
+                      <p>
+                        <calcite-icon scale="l" icon="layer"></calcite-icon>
+                        An unbelievable new feature has arrived in this exciting product category. It's pretty neat.
+                      </p>
+                    </calcite-carousel-item>
+                    <calcite-carousel-item label="The Long Trees">
+                      <p>
+                        <calcite-icon scale="l" icon="3d-glasses"></calcite-icon>
+                        Another bit of content about this unbelievable item can go here on the second carousel item as
+                        an example
+                      </p>
+                    </calcite-carousel-item>
+                    <calcite-carousel-item label="The Red Rocks and Blue Water">
+                      <p>
+                        <calcite-icon scale="l" icon="layer"></calcite-icon>
+                        An unbelievable new feature has arrived in this exciting product category. It's pretty neat.
+                      </p>
+                    </calcite-carousel-item>
+                    <calcite-carousel-item label="The Red Rocks and Blue Water">
+                      <p>
+                        <calcite-icon scale="l" icon="layer"></calcite-icon>
+                        An unbelievable new feature has arrived in this exciting product category. It's pretty neat.
+                      </p>
+                    </calcite-carousel-item>
+                    <calcite-carousel-item label="The Long Trees">
+                      <p>
+                        <calcite-icon scale="l" icon="3d-glasses"></calcite-icon>
+                        Another bit of content about this unbelievable item can go here on the second carousel item as
+                        an example
+                      </p>
+                    </calcite-carousel-item>
+                    <calcite-carousel-item label="The Red Rocks and Blue Water">
+                      <p>
+                        <calcite-icon scale="l" icon="layer"></calcite-icon>
+                        An unbelievable new feature has arrived in this exciting product category. It's pretty neat.
+                      </p>
+                    </calcite-carousel-item>
+                  </calcite-carousel>
+                </calcite-popover>
+              </calcite-panel>
+              <calcite-shell-panel slot="panel-start" width-scale="l">
+                <calcite-panel heading="Carousel in context">
+                  <calcite-block open heading="Carousel in block">
+                    <calcite-carousel id="example-carousel" control-overlay control-type="bar" display-arrows>
+                      <calcite-carousel-item label="The Red Rocks and Blue Water">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Long Trees">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="Square Nature">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The lack of imagery">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Red Rocks and Blue Water">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Long Trees">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="Square Nature">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The lack of imagery">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                    </calcite-carousel>
+                  </calcite-block>
+                  <calcite-block open heading="Carousel in block no pad and options" style="--calcite-block-padding: 0">
+                    <calcite-carousel id="example-carousel" control-overlay control-position="top">
+                      <calcite-carousel-item label="The Red Rocks and Blue Water">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Long Trees">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="Square Nature">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The lack of imagery">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Red Rocks and Blue Water">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The Long Trees">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="Square Nature">
+                        <p class="bg-image-example">
+                          Some kind of rich content over a bg using overlay controls but longer than the other one
+                        </p>
+                      </calcite-carousel-item>
+                      <calcite-carousel-item label="The lack of imagery">
+                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                      </calcite-carousel-item>
+                    </calcite-carousel>
+                  </calcite-block>
+                </calcite-panel>
+              </calcite-shell-panel>
+            </calcite-shell>
+          </div>
         </div>
       </div>
       <script>
         const carousel = document.getElementById("example-carousel");
 
         const switchOverlay = document.getElementById("switch-overlay");
+        const switchArrows = document.getElementById("switch-arrows");
+
         const controlScale = document.getElementById("control-scale");
         const controlPosition = document.getElementById("control-position");
         const controlType = document.getElementById("control-type");
 
         switchOverlay.addEventListener("calciteSwitchChange", function () {
           carousel.controlOverlay = event.target.checked;
+        });
+
+        switchArrows.addEventListener("calciteSwitchChange", function () {
+          carousel.displayArrows = event.target.checked;
         });
 
         controlScale.addEventListener("calciteSegmentedControlChange", function () {

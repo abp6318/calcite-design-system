@@ -7,7 +7,7 @@ import {
   connectMessages,
   disconnectMessages,
   setUpMessages,
-  updateMessages
+  updateMessages,
 } from "../../utils/t9n";
 import { HeadingLevel } from "../functional/Heading";
 import { CarouselMessages } from "./assets/carousel/t9n";
@@ -21,7 +21,7 @@ import { Scale } from "../interfaces";
   tag: "calcite-carousel",
   styleUrl: "carousel.scss",
   shadow: true,
-  assetsDirs: ["assets"]
+  assetsDirs: ["assets"],
 })
 export class Carousel {
   // --------------------------------------------------------------------------
@@ -60,12 +60,17 @@ export class Carousel {
   /**
    * control how the dots are displayed - top, bottom, start, end (automatically positions vertically / horizontally)
    */
-  @Prop() controlPosition?: "start" | "end" | "top" | "bottom" = "bottom";
+  @Prop() controlPosition?: "top" | "bottom" = "bottom";
 
   /**
    * control if the displayed control are dot, or bar
    */
   @Prop() controlType?: "dot" | "bar" = "dot";
+
+  /**
+   * control if the displayed control are dot, or bar
+   */
+  @Prop() displayArrows?: boolean;
 
   /** Specifies the size of the component. */
   @Prop({ reflect: true }) scale: Scale = "m";
@@ -232,33 +237,16 @@ export class Carousel {
   //
   // --------------------------------------------------------------------------
   renderPagination(): VNode {
-    const dir = getElementDir(this.el);
-    const { selectedIndex, tips, messages } = this;
-
-    const nextLabel = messages.next;
-    const previousLabel = messages.previous;
+    const { selectedIndex, tips } = this;
 
     return tips.length > 1 ? (
       <div
         class={{
           [CSS.pagination]: true,
           ["is-overlay"]: this.controlOverlay,
-          ["is-bar"]: this.controlType === "bar"
+          ["is-bar"]: this.controlType === "bar",
         }}
       >
-        <calcite-action
-          class={CSS.pagePrevious}
-          icon={
-            this.controlPosition === "start" || this.controlPosition === "end"
-              ? "chevronUp"
-              : dir === "ltr"
-              ? ICONS.chevronLeft
-              : ICONS.chevronRight
-          }
-          onClick={this.previousClicked}
-          scale={this.scale}
-          text={previousLabel}
-        />
         {this.tips.map((tip, index) => (
           <Fragment>
             <div
@@ -267,38 +255,54 @@ export class Carousel {
               } `}
               id={`${guid}-${index}`}
               onClick={() => this.goToClick(index)}
+              tabIndex={1}
             >
               {this.controlType !== "bar" && (
                 <calcite-action
+                  appearance="transparent"
+                  icon={index === selectedIndex ? "circle-f" : "circle"}
                   scale={this.scale}
-                  icon={index === selectedIndex ? "square-f" : "square-area"}
-                  text={previousLabel}
+                  text={tip.label}
                 />
               )}
             </div>
-            <calcite-tooltip
-              label="Slide Title"
-              reference-element={`${guid}-${index}`}
-              placement="bottom"
-            >
-              Slide title / label: {tip.label}
+            <calcite-tooltip placement="bottom" reference-element={`${guid}-${index}`}>
+              {tip.label}
             </calcite-tooltip>
           </Fragment>
         ))}
-        <calcite-action
-          class={CSS.pageNext}
-          icon={
-            this.controlPosition === "start" || this.controlPosition === "end"
-              ? "chevronDown"
-              : dir === "ltr"
-              ? ICONS.chevronRight
-              : ICONS.chevronLeft
-          }
-          onClick={this.nextClicked}
-          scale={this.scale}
-          text={nextLabel}
-        />
       </div>
+    ) : null;
+  }
+
+  renderArrows(): VNode {
+    const dir = getElementDir(this.el);
+    const { tips, messages } = this;
+
+    const nextLabel = messages.next;
+    const previousLabel = messages.previous;
+
+    return tips.length > 1 ? (
+      <Fragment>
+        <calcite-button
+          class={CSS.pagePrevious}
+          iconEnd={dir === "ltr" ? ICONS.chevronLeft : ICONS.chevronRight}
+          kind="neutral"
+          label={previousLabel}
+          onClick={this.previousClicked}
+          round
+          scale={this.scale}
+        />
+        <calcite-button
+          class={CSS.pageNext}
+          iconStart={dir === "ltr" ? ICONS.chevronRight : ICONS.chevronLeft}
+          kind="neutral"
+          label={nextLabel}
+          onClick={this.nextClicked}
+          round
+          scale={this.scale}
+        />
+      </Fragment>
     ) : null;
   }
 
@@ -321,7 +325,7 @@ export class Carousel {
           class={{
             [CSS.tipContainer]: true,
             [CSS.tipContainerAdvancing]: direction === "advancing",
-            [CSS.tipContainerRetreating]: direction === "retreating"
+            [CSS.tipContainerRetreating]: direction === "retreating",
           }}
           key={selectedIndex}
           tabIndex={0}
@@ -329,6 +333,7 @@ export class Carousel {
           <slot />
         </div>
         {this.renderPagination()}
+        {this.displayArrows && this.renderArrows()}
       </section>
     );
   }

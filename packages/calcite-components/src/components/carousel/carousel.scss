@@ -8,12 +8,11 @@
  */
 
 .container {
-  @apply bg-foreground-1
-  text-color-2
+  @apply text-color-2
   text-n1h
-  box-border
   w-full
-  block;
+  block
+  relative;
 
   * {
     @apply box-border;
@@ -56,19 +55,8 @@
     flex
     overflow-hidden;
   flex-direction: column;
-  min-block-size: 150px;
   &.top {
     flex-direction: column-reverse;
-  }
-  &.start {
-    flex-direction: row-reverse;
-  }
-  &.end {
-    flex-direction: row;
-  }
-  &.start .pagination,
-  &.end .pagination {
-    flex-direction: column;
   }
 
   &:focus {
@@ -78,24 +66,17 @@
 
 .tip-container {
   @apply focus-base
-    mt-px
     flex
     items-start
     justify-center
     overflow-auto
-    flex-auto
-    p-4;
+    flex-auto;
   animation-name: none;
   animation-duration: var(--calcite-animation-timing);
 
   &:focus {
     @apply focus-inset;
   }
-}
-
-::slotted(calcite-carousel-item) {
-  @apply border-none p-3;
-  max-inline-size: var(--calcite-carousel-item-max-width);
 }
 
 .tip-container--advancing {
@@ -113,19 +94,30 @@
   justify-center
   p-3;
   &.is-overlay {
-    // absolute
     position: absolute;
-    inset-inline-start: 0;
+    background: rgba(255, 255, 255, 0.3);
   }
   &.is-bar {
-    gap: 8px;
+    gap: 0.5rem;
   }
+}
+
+.top .pagination.is-overlay {
+  inset-block-end: unset;
+  inset-block-start: 0;
+  inset-inline: 0;
+}
+
+.bottom .pagination.is-overlay {
+  inset-block-start: unset;
+  inset-block-end: 0;
+  inset-inline: 0;
 }
 
 .is-bar .pagination-item {
   display: flex;
-  inline-size: 24px;
-  block-size: 8px;
+  inline-size: 1.5rem;
+  block-size: 0.5rem;
   cursor: pointer;
   background-color: var(--calcite-ui-border-3);
   &.active-icon {
@@ -138,8 +130,20 @@
     --calcite-ui-icon-color: var(--calcite-ui-brand);
   }
 }
-.page-position {
-  @apply text-n2h my-0 mx-2;
+
+.page-next,
+.page-previous {
+  position: absolute;
+}
+
+.page-next {
+  inset-inline-end: 1rem;
+  inset-block-start: 40%;
+}
+
+.page-previous {
+  inset-inline-start: 1rem;
+  inset-block-start: 40%;
 }
 
 /* @keyframes*/
