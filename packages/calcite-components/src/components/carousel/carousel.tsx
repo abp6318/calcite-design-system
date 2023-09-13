@@ -65,7 +65,7 @@ export class Carousel {
   /**
    * control if the displayed control are dot, or bar
    */
-  @Prop() controlType?: "dot" | "bar" = "dot";
+  @Prop() controlType?: "circle" | "square" = "circle";
 
   /**
    * control if the displayed control are dot, or bar
@@ -237,52 +237,54 @@ export class Carousel {
   //
   // --------------------------------------------------------------------------
   renderPagination(): VNode {
-    const { selectedIndex, tips } = this;
+    const { selectedIndex } = this;
 
-    return tips.length > 1 ? (
+    return (
       <div
         class={{
           [CSS.pagination]: true,
           ["is-overlay"]: this.controlOverlay,
-          ["is-bar"]: this.controlType === "bar",
+          ["is-bar"]: this.controlType === "square",
         }}
       >
         {this.tips.map((tip, index) => (
           <Fragment>
-            <div
-              class={`pagination-item ${index === selectedIndex ? " active-icon" : ""} ${
-                index === selectedIndex ? " active-icon" : ""
-              } `}
+            <calcite-button
+              appearance={this.controlOverlay ? "solid" : "transparent"}
+              class={`pagination-item${index === selectedIndex ? " active-icon" : ""}`}
+              iconStart={
+                index === selectedIndex && this.controlType !== "square"
+                  ? "circle-area"
+                  : index === selectedIndex
+                  ? "square-area"
+                  : this.controlType !== "square"
+                  ? "circle"
+                  : "square"
+              }
               id={`${guid}-${index}`}
+              kind={index === selectedIndex ? "neutral" : "neutral"}
+              label={tip.label}
               onClick={() => this.goToClick(index)}
-              tabIndex={1}
-            >
-              {this.controlType !== "bar" && (
-                <calcite-action
-                  appearance="transparent"
-                  icon={index === selectedIndex ? "circle-f" : "circle"}
-                  scale={this.scale}
-                  text={tip.label}
-                />
-              )}
-            </div>
+              round={this.controlType !== "square"}
+              scale={this.scale}
+            />
             <calcite-tooltip placement="bottom" reference-element={`${guid}-${index}`}>
               {tip.label}
             </calcite-tooltip>
           </Fragment>
         ))}
       </div>
-    ) : null;
+    );
   }
 
   renderArrows(): VNode {
     const dir = getElementDir(this.el);
-    const { tips, messages } = this;
+    const { messages } = this;
 
     const nextLabel = messages.next;
     const previousLabel = messages.previous;
 
-    return tips.length > 1 ? (
+    return (
       <Fragment>
         <calcite-button
           class={CSS.pagePrevious}
@@ -290,7 +292,7 @@ export class Carousel {
           kind="neutral"
           label={previousLabel}
           onClick={this.previousClicked}
-          round
+          round={this.controlType === "circle"}
           scale={this.scale}
         />
         <calcite-button
@@ -299,11 +301,11 @@ export class Carousel {
           kind="neutral"
           label={nextLabel}
           onClick={this.nextClicked}
-          round
+          round={this.controlType === "circle"}
           scale={this.scale}
         />
       </Fragment>
-    ) : null;
+    );
   }
 
   render(): VNode {
@@ -328,12 +330,11 @@ export class Carousel {
             [CSS.tipContainerRetreating]: direction === "retreating",
           }}
           key={selectedIndex}
-          tabIndex={0}
         >
           <slot />
         </div>
-        {this.renderPagination()}
-        {this.displayArrows && this.renderArrows()}
+        {this.displayArrows && this.tips.length > 1 && this.renderArrows()}
+        {this.tips.length > 1 && this.renderPagination()}
       </section>
     );
   }

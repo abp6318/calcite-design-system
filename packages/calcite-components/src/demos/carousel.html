@@ -94,8 +94,8 @@
             <calcite-label
               >controlType
               <calcite-segmented-control id="control-type">
-                <calcite-segmented-control-item value="dot" checked>Dot</calcite-segmented-control-item>
-                <calcite-segmented-control-item value="bar">Bar</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="circle" checked>Circle</calcite-segmented-control-item>
+                <calcite-segmented-control-item value="square">Square</calcite-segmented-control-item>
               </calcite-segmented-control>
             </calcite-label>
             <calcite-label
@@ -111,42 +111,42 @@
         <div class="parent">
           <div class="child">
             <calcite-carousel id="example-carousel">
-              <calcite-carousel-item heading="The Red Rocks and Blue Water">
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
                 <p>
                   This tip is how a tip should really look. It has a landscape or square image and a small amount of
                   text content. This paragraph is in an "info" slot.
                 </p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="The Long Trees">
+              <calcite-carousel-item label="The Long Trees">
                 <p>
                   This tip has an image that is a pretty tall. And the text will run out before the end of the image.
                 </p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="Square Nature">
+              <calcite-carousel-item label="Square Nature">
                 <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="The lack of imagery">
+              <calcite-carousel-item label="The lack of imagery">
                 <p>
                   This is the next paragraph and should show how wide the content area is now. Of course, the width of
                   the overall tip will affect things. In astronomy, the terms object and body are often used
                   interchangeably.
                 </p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="The Red Rocks and Blue Water">
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
                 <p>
                   This tip is how a tip should really look. It has a landscape or square image and a small amount of
                   text content. This paragraph is in an "info" slot.
                 </p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="The Long Trees">
+              <calcite-carousel-item label="The Long Trees">
                 <p>
                   This tip has an image that is a pretty tall. And the text will run out before the end of the image.
                 </p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="Square Nature">
+              <calcite-carousel-item label="Square Nature">
                 <p>This tip has an image that is square. And the text will run out before the end of the image.</p>
               </calcite-carousel-item>
-              <calcite-carousel-item heading="The lack of imagery">
+              <calcite-carousel-item label="The lack of imagery">
                 <p>
                   This is the next paragraph and should show how wide the content area is now. Of course, the width of
                   the overall tip will affect things. In astronomy, the terms object and body are often used
@@ -241,7 +241,12 @@
                     </calcite-carousel>
                   </calcite-block>
                   <calcite-block open heading="Carousel in block no pad and options" style="--calcite-block-padding: 0">
-                    <calcite-carousel id="example-carousel" control-overlay control-position="top">
+                    <calcite-carousel
+                      id="example-carousel"
+                      control-overlay
+                      control-position="top"
+                      control-type="square"
+                    >
                       <calcite-carousel-item label="The Red Rocks and Blue Water">
                         <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
                       </calcite-carousel-item>
