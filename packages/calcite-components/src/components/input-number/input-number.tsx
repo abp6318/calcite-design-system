@@ -123,8 +123,7 @@ export class InputNumber
    *
    * When not set, the component will be associated with its ancestor form element, if any.
    */
-  @Prop({ reflect: true })
-  form: string;
+  @Prop({ reflect: true }) form: string;
 
   /**
    * When `true`, number values are displayed with a group separator corresponding to the language and country format.
@@ -897,6 +896,7 @@ export class InputNumber
         this.localizedValue = numberStringFormatter.localize(this.previousValue);
       } else if (committing) {
         this.emitChangeIfUserModified();
+        this.validate();
       }
     }
   };
@@ -910,6 +910,26 @@ export class InputNumber
       console.warn(`The specified value "${value}" cannot be parsed, or is out of range.`);
     }
   }
+
+  private validate = (): void => {
+    const value = Number(this.value);
+
+    if (!this.required) {
+      this.childNumberEl?.setCustomValidity("");
+      return;
+    } else if (isNaN(value)) {
+      this.childNumberEl?.setCustomValidity("Not a number, yo!");
+    } else if (value < this.min) {
+      this.childNumberEl?.setCustomValidity("Number too smol, yo!");
+    } else if (value > this.max) {
+      this.childNumberEl?.setCustomValidity("Number too yuge, yo!");
+    } else {
+      this.childNumberEl?.setCustomValidity("");
+    }
+
+    const isValid = this.childNumberEl?.reportValidity();
+    this.status = isValid ? "valid" : "invalid";
+  };
 
   // --------------------------------------------------------------------------
   //
@@ -1017,6 +1037,7 @@ export class InputNumber
         onKeyUp={this.inputNumberKeyUpHandler}
         placeholder={this.placeholder || ""}
         readOnly={this.readOnly}
+        required={this.required}
         type="text"
         value={this.localizedValue}
         // eslint-disable-next-line react/jsx-sort-props -- ref should be last so node attrs/props are in sync (see https://github.com/Esri/calcite-design-system/pull/6530)

@@ -1011,8 +1011,33 @@ export class Input
             : this.previousValue;
       } else if (committing) {
         this.emitChangeIfUserModified();
+        this.validate();
       }
     }
+  };
+
+  private validate = (): void => {
+    if (!this.required) {
+      (this.type === "number" ? this.childNumberEl : this.childEl)?.setCustomValidity("");
+      return;
+    }
+
+    if (this.type === "number") {
+      const value = Number(this.value);
+
+      if (isNaN(value)) {
+        this.childNumberEl?.setCustomValidity("Not a number, yo!");
+      } else if (value < this.min) {
+        this.childNumberEl?.setCustomValidity("Number too smol, yo!");
+      } else if (value > this.max) {
+        this.childNumberEl?.setCustomValidity("Number too yuge, yo!");
+      } else {
+        this.childNumberEl?.setCustomValidity("");
+      }
+    }
+
+    const isValid = this.childNumberEl?.reportValidity();
+    this.status = isValid ? "valid" : "invalid";
   };
 
   private inputKeyUpHandler = (): void => {
