@@ -1,6 +1,5 @@
 $RECYCLE.BIN/
 *.bak
-*.d.ts
 *.lock
 *.log
 *.orig

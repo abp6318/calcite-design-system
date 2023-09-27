@@ -1,6 +1,6 @@
+import { FunctionalComponent, h } from "@stencil/core";
 import "form-request-submit-polyfill/form-request-submit-polyfill";
 import { closestElementCrossShadowBoundary, queryElementRoots } from "./dom";
-import { FunctionalComponent, h } from "@stencil/core";
 
 /**
  * Exported for testing purposes.
@@ -116,8 +116,9 @@ const formComponentSet = new WeakSet<HTMLElement>();
 /**
  * This helps determine if our form component is part of a composite form-associated component.
  *
- * @param form
- * @param formComponentEl
+ * @param form - the form element
+ * @param formComponentEl - the potentially form-associated component element
+ * @returns true if the component has a registered form component parent
  */
 function hasRegisteredFormComponentParent(
   form: HTMLFormElement,
@@ -162,7 +163,7 @@ function hasRegisteredFormComponentParent(
 /**
  * Helper to submit a form.
  *
- * @param component
+ * @param component - the form owning component
  * @returns true if its associated form was submitted, false otherwise.
  */
 export function submitForm(component: FormOwner): boolean {
@@ -180,7 +181,7 @@ export function submitForm(component: FormOwner): boolean {
 /**
  * Helper to reset a form.
  *
- * @param component
+ * @param component - the form owning component
  */
 export function resetForm(component: FormOwner): void {
   component.formEl?.reset();
@@ -189,7 +190,7 @@ export function resetForm(component: FormOwner): void {
 /**
  * Helper to set up form interactions on connectedCallback.
  *
- * @param component
+ * @param component - the component to associate with a form
  */
 export function connectForm<T>(component: FormComponent<T>): void {
   const { el, value } = component;
@@ -215,7 +216,8 @@ export function connectForm<T>(component: FormComponent<T>): void {
 /**
  * Utility method to find a form-component's associated form element.
  *
- * @param component
+ * @param component - the form owning component
+ * @returns the form element, if it exists
  */
 export function findAssociatedForm(component: FormOwner): HTMLFormElement | null {
   const { el, form } = component;
@@ -237,7 +239,7 @@ function onFormReset<T>(this: FormComponent<T>): void {
 /**
  * Helper to tear down form interactions on disconnectedCallback.
  *
- * @param component
+ * @param component - the component to disconnect from the form
  */
 export function disconnectForm<T>(component: FormComponent<T>): void {
   const { el, formEl } = component;
@@ -258,8 +260,8 @@ export function disconnectForm<T>(component: FormComponent<T>): void {
  *
  * Note that this is only needed if the default value cannot be determined on connectedCallback.
  *
- * @param component
- * @param value
+ * @param component - the component who's default value will be set
+ * @param value - the default value for the component
  */
 export function afterConnectDefaultValueSet<T>(component: FormComponent<T>, value: any): void {
   component.defaultValue = value;
@@ -279,7 +281,7 @@ const removeHiddenInputChangeEventListener = (input: HTMLInputElement) =>
  *
  * Based on Ionic's approach: https://github.com/ionic-team/ionic-framework/blob/e4bf052794af9aac07f887013b9250d2a045eba3/core/src/utils/helpers.ts#L198
  *
- * @param component
+ * @param component - the form-associated component to sync with the hidden input
  */
 function syncHiddenFormInput(component: FormComponent): void {
   const { el, formEl, name, value } = component;
@@ -324,12 +326,12 @@ function syncHiddenFormInput(component: FormComponent): void {
     let input = extra.pop();
 
     if (!input) {
-      input = ownerDocument!.createElement("input");
+      input = ownerDocument.createElement("input");
       input.slot = hiddenFormInputSlotName;
     }
 
     if (!docFrag) {
-      docFrag = ownerDocument!.createDocumentFragment();
+      docFrag = ownerDocument.createDocumentFragment();
     }
 
     docFrag.append(input);
@@ -404,8 +406,9 @@ interface HiddenFormInputSlotProps {
  *
  * Note that the hidden-form-input Sass mixin must be added to the component's style to apply specific styles.
  *
- * @param root0
- * @param root0.component
+ * @param root0 - object
+ * @param root0.component - usually `this`
+ * @returns a slot for the hidden input
  */
 export const HiddenFormInputSlot: FunctionalComponent<HiddenFormInputSlotProps> = ({
   component,
