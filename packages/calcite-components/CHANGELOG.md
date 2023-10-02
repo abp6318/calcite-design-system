@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.0-next.16](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.15...@esri/calcite-components@1.9.0-next.16) (2023-10-02)
+
+### Bug Fixes
+
+- **action-menu:** update active selection to not use the action's active property ([#7911](https://github.com/Esri/calcite-design-system/issues/7911)) ([50f85f1](https://github.com/Esri/calcite-design-system/commit/50f85f157e372ef0db35051c3436d4b9989cd78e)), closes [#7910](https://github.com/Esri/calcite-design-system/issues/7910)
+- **table:** Fix selection display in RTL ([#7907](https://github.com/Esri/calcite-design-system/issues/7907)) ([b4c8508](https://github.com/Esri/calcite-design-system/commit/b4c850857d506dbf11c872afe25c2963d798db57)), closes [#7903](https://github.com/Esri/calcite-design-system/issues/7903)
+
+## [1.9.0-next.15](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.14...@esri/calcite-components@1.9.0-next.15) (2023-09-29)
+
+### Bug Fixes
+
+- **button:** provides context for AT users when used as reference element for collapsible content ([#7658](https://github.com/Esri/calcite-design-system/issues/7658)) ([50cb3a6](https://github.com/Esri/calcite-design-system/commit/50cb3a604263316ae0021486dc6afca1fe0f9a02)), closes [#6033](https://github.com/Esri/calcite-design-system/issues/6033)
+
+## [1.9.0-next.14](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.13...@esri/calcite-components@1.9.0-next.14) (2023-09-29)
+
+### Bug Fixes
+
+- **tree:** fix tree keyboard selection issue ([#7908](https://github.com/Esri/calcite-design-system/issues/7908)) ([53d6c12](https://github.com/Esri/calcite-design-system/commit/53d6c123b9c5861d9ef7330da52e7c89d9d74fe2)), closes [#7898](https://github.com/Esri/calcite-design-system/issues/7898)
+
+## [1.9.0-next.13](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.12...@esri/calcite-components@1.9.0-next.13) (2023-09-29)
+
+### Features
+
+- **alert:** make component responsive ([#7755](https://github.com/Esri/calcite-design-system/issues/7755)) ([66222b5](https://github.com/Esri/calcite-design-system/commit/66222b55561ea505233905fba1dd9f48f03bd027)), closes [#6673](https://github.com/Esri/calcite-design-system/issues/6673)
+
+### Bug Fixes
+
+- **tree:** update tree selection per design spec ([#7852](https://github.com/Esri/calcite-design-system/issues/7852)) ([06b3594](https://github.com/Esri/calcite-design-system/commit/06b359493feb2a978257b6617cce7f4ff62352f3)), closes [#6971](https://github.com/Esri/calcite-design-system/issues/6971)
+
+## [1.9.0-next.12](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.11...@esri/calcite-components@1.9.0-next.12) (2023-09-28)
+
+### Bug Fixes
+
+- **dropdown-group:** set selectionMode on slotted dropdown-item children ([#7897](https://github.com/Esri/calcite-design-system/issues/7897)) ([aa0731a](https://github.com/Esri/calcite-design-system/commit/aa0731a10eda31af4e4621640a5b375037f2e43a)), closes [#7707](https://github.com/Esri/calcite-design-system/issues/7707)
+
 ## [1.9.0-next.11](https://github.com/Esri/calcite-design-system/compare/@esri/calcite-components@1.9.0-next.10...@esri/calcite-components@1.9.0-next.11) (2023-09-27)
 
 ### Features
