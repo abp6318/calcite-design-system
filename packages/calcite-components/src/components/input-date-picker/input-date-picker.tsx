@@ -512,7 +512,6 @@ export class InputDatePicker
     numberStringFormatter.numberFormatOptions = {
       numberingSystem,
       locale: effectiveLocale,
-      useGrouping: false,
     };
 
     return (
@@ -1111,8 +1110,13 @@ export class InputDatePicker
 
   private commonDateSeparators = [".", "-", "/"];
 
-  private formatNumerals = (value: string): string =>
-    value
+  private formatNumerals = (value: string): string => {
+    numberStringFormatter.numberFormatOptions = {
+      numberingSystem: this.numberingSystem,
+      locale: this.effectiveLocale,
+    };
+
+    return value
       ? value
           .split("")
           .map((char: string) =>
@@ -1124,6 +1128,7 @@ export class InputDatePicker
           )
           .join("")
       : "";
+  };
 
   private parseNumerals = (value: string): string =>
     value
