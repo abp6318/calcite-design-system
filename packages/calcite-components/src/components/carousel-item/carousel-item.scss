@@ -2,6 +2,9 @@
   @apply m-0 border-none p-0;
 }
 
+:host {
+  @apply w-full;
+}
 @import "../../assets/styles/header";
 
 .header {
@@ -16,5 +19,5 @@
 }
 
 .content {
-  @apply flex;
+  @apply flex w-full;
 }

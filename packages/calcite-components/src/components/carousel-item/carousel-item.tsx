@@ -1,8 +1,8 @@
-import { Component, Element, Fragment, h, Prop, State, VNode, Watch } from "@stencil/core";
+import { Component, Element, h, Prop, State, VNode, Watch } from "@stencil/core";
 import {
   ConditionalSlotComponent,
   connectConditionalSlotComponent,
-  disconnectConditionalSlotComponent
+  disconnectConditionalSlotComponent,
 } from "../../utils/conditionalSlot";
 import { connectLocalized, disconnectLocalized, LocalizedComponent } from "../../utils/locale";
 import {
@@ -10,7 +10,7 @@ import {
   disconnectMessages,
   setUpMessages,
   T9nComponent,
-  updateMessages
+  updateMessages,
 } from "../../utils/t9n";
 import { CarouselItemMessages } from "./assets/carousel-item/t9n";
 import { CSS } from "./resources";
@@ -23,7 +23,7 @@ import { CSS } from "./resources";
   tag: "calcite-carousel-item",
   styleUrl: "carousel-item.scss",
   shadow: true,
-  assetsDirs: ["assets"]
+  assetsDirs: ["assets"],
 })
 export class CarouselItem implements ConditionalSlotComponent, LocalizedComponent, T9nComponent {
   // --------------------------------------------------------------------------
@@ -112,23 +112,15 @@ export class CarouselItem implements ConditionalSlotComponent, LocalizedComponen
   //
   // --------------------------------------------------------------------------
 
-  renderInfoNode(): VNode {
-    return (
-      <div class={CSS.info}>
-        <slot />
-      </div>
-    );
-  }
-
-  renderContent(): VNode {
-    return <div class={CSS.content}>{this.renderInfoNode()}</div>;
-  }
-
   render(): VNode {
     return (
-      <Fragment>
-        <article class={CSS.container}>{this.renderContent()}</article>
-      </Fragment>
+      <article class={CSS.container}>
+        <div class={CSS.content + `${this.selected ? " selected" : ""}`}>
+          <div class={CSS.info}>
+            <slot />
+          </div>
+        </div>
+      </article>
     );
   }
 }

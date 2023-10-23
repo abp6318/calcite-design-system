@@ -38,13 +38,6 @@
 
   padding-inline-end: theme("padding.0");
   padding-inline-start: theme("padding.4");
-
-  .heading {
-    @apply text-color-1
-      text-1h
-      p-0
-      font-bold;
-  }
 }
 
 .container {
@@ -71,7 +64,7 @@
     flex-auto;
   animation-name: none;
   animation-duration: var(--calcite-animation-timing);
-
+  gap: 1rem;
   &:focus {
     @apply focus-inset;
   }
@@ -85,14 +78,16 @@
   animation-name: tip-retreat;
 }
 
+calcite-carousel-item:not([selected]) {
+  opacity: 0.5;
+}
 /* Pagination Styles*/
 .pagination {
   @apply flex
   items-center
   justify-center
   p-3;
-  gap: 0.5rem;
-
+  inline-size: auto;
   &.is-overlay {
     position: absolute;
   }
@@ -116,23 +111,6 @@
 
 .active-icon {
   --calcite-ui-icon-color: var(--calcite-ui-brand);
-}
-
-.page-next,
-.page-previous {
-  position: absolute;
-}
-
-.page-next {
-  inset-inline-end: 0;
-  inset-block-start: 40%;
-  --calcite-focus-inverse: 1;
-}
-
-.page-previous {
-  inset-inline-start: 0;
-  inset-block-start: 40%;
-  --calcite-focus-inverse: 1;
 }
 
 /* @keyframes*/

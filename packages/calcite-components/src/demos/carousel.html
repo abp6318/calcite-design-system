@@ -85,6 +85,10 @@
               <calcite-switch id="switch-arrows"></calcite-switch>
             </calcite-label>
             <calcite-label
+              >displayCount
+              <calcite-input-number id="input-count" value="1"></calcite-input-number>
+            </calcite-label>
+            <calcite-label
               >controlPosition
               <calcite-segmented-control id="control-position">
                 <calcite-segmented-control-item value="top">Top</calcite-segmented-control-item>
@@ -152,6 +156,66 @@
                   the overall tip will affect things. In astronomy, the terms object and body are often used
                   interchangeably.
                 </p>
+              </calcite-carousel-item>
+            </calcite-carousel>
+          </div>
+          <div class="child">
+            <hr />
+
+            <calcite-carousel id="example-carousel" display-arrows display-count="3">
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
+              </calcite-carousel-item>
+              <calcite-carousel-item label="The Long Trees">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
+              </calcite-carousel-item>
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
+              </calcite-carousel-item>
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
+              </calcite-carousel-item>
+              <calcite-carousel-item label="The Long Trees">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
+              </calcite-carousel-item>
+              <calcite-carousel-item label="The Red Rocks and Blue Water">
+                <calcite-card>
+                  <div slot="title">ArcGIS Online: Gallery and Organization pages</div>
+                  <span slot="subtitle"
+                    >A great example of a study description that might wrap to a line or two, but isn't overly
+                    verbose.</span
+                  >
+                </calcite-card>
               </calcite-carousel-item>
             </calcite-carousel>
           </div>
@@ -248,36 +312,44 @@
                       control-type="square"
                     >
                       <calcite-carousel-item label="The Red Rocks and Blue Water">
-                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                        <p class="bg-image-example example-2">
+                          Some kind of rich content over a bg using overlay controls
+                        </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="The Long Trees">
-                        <p class="bg-image-example">
+                        <p class="bg-image-example example-2">
                           Some kind of rich content over a bg using overlay controls but longer than the other one
                         </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="Square Nature">
-                        <p class="bg-image-example">
+                        <p class="bg-image-example example-2">
                           Some kind of rich content over a bg using overlay controls but longer than the other one
                         </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="The lack of imagery">
-                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                        <p class="bg-image-example example-2">
+                          Some kind of rich content over a bg using overlay controls
+                        </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="The Red Rocks and Blue Water">
-                        <p class="bg-image-example">
+                        <p class="bg-image-example example-2">
                           Some kind of rich content over a bg using overlay controls but longer than the other one
                         </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="The Long Trees">
-                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                        <p class="bg-image-example example-2">
+                          Some kind of rich content over a bg using overlay controls
+                        </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="Square Nature">
-                        <p class="bg-image-example">
+                        <p class="bg-image-example example-2">
                           Some kind of rich content over a bg using overlay controls but longer than the other one
                         </p>
                       </calcite-carousel-item>
                       <calcite-carousel-item label="The lack of imagery">
-                        <p class="bg-image-example">Some kind of rich content over a bg using overlay controls</p>
+                        <p class="bg-image-example example-2">
+                          Some kind of rich content over a bg using overlay controls
+                        </p>
                       </calcite-carousel-item>
                     </calcite-carousel>
                   </calcite-block>
@@ -292,6 +364,7 @@
 
         const switchOverlay = document.getElementById("switch-overlay");
         const switchArrows = document.getElementById("switch-arrows");
+        const inputCount = document.getElementById("input-count");
 
         const controlScale = document.getElementById("control-scale");
         const controlPosition = document.getElementById("control-position");
@@ -303,6 +376,10 @@
 
         switchArrows.addEventListener("calciteSwitchChange", function () {
           carousel.displayArrows = event.target.checked;
+        });
+
+        inputCount.addEventListener("calciteInputNumberInput", function () {
+          carousel.displayCount = event.target.value;
         });
 
         controlScale.addEventListener("calciteSegmentedControlChange", function () {
