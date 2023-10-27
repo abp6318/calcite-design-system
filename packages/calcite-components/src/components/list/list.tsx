@@ -11,8 +11,8 @@ import {
   VNode,
   Watch,
 } from "@stencil/core";
-import Sortable from "sortablejs";
 import { debounce } from "lodash-es";
+import Sortable from "sortablejs";
 import { slotChangeHasAssignedElement, toAriaBoolean } from "../../utils/dom";
 import {
   connectInteractive,
@@ -21,19 +21,18 @@ import {
   updateHostInteraction,
 } from "../../utils/interactive";
 import { createObserver } from "../../utils/observers";
-import { SelectionMode } from "../interfaces";
+import {
+  connectSortableComponent,
+  disconnectSortableComponent,
+  dragActive,
+  SortableComponent,
+} from "../../utils/sortableComponent";
+import { DragDetail, SelectionMode } from "../interfaces";
 import { ItemData } from "../list-item/interfaces";
 import { MAX_COLUMNS } from "../list-item/resources";
 import { getListItemChildren, updateListItemChildren } from "../list-item/utils";
-import { CSS, debounceTimeout, SelectionAppearance, SLOTS } from "./resources";
-import {
-  DragDetail,
-  connectSortableComponent,
-  disconnectSortableComponent,
-  SortableComponent,
-  dragActive,
-} from "../../utils/sortableComponent";
 import { SLOTS as STACK_SLOTS } from "../stack/resources";
+import { CSS, debounceTimeout, SelectionAppearance, SLOTS } from "./resources";
 
 const listItemSelector = "calcite-list-item";
 const listItemSelectorDirect = `:scope > calcite-list-item`;

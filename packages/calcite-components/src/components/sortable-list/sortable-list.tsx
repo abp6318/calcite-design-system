@@ -1,5 +1,6 @@
 import { Component, Element, Event, EventEmitter, h, Listen, Prop, VNode } from "@stencil/core";
 import Sortable from "sortablejs";
+import { focusElement } from "../../utils/dom";
 import {
   connectInteractive,
   disconnectInteractive,
@@ -7,17 +8,15 @@ import {
   updateHostInteraction,
 } from "../../utils/interactive";
 import { createObserver } from "../../utils/observers";
-import { HandleNudge } from "../handle/interfaces";
-import { Layout } from "../interfaces";
-import { CSS } from "./resources";
 import {
-  DragDetail,
   connectSortableComponent,
   disconnectSortableComponent,
-  SortableComponent,
   dragActive,
+  SortableComponent,
 } from "../../utils/sortableComponent";
-import { focusElement } from "../../utils/dom";
+import { HandleNudge } from "../handle/interfaces";
+import { DragDetail, Layout } from "../interfaces";
+import { CSS } from "./resources";
 
 /**
  * @slot - A slot for adding sortable items.

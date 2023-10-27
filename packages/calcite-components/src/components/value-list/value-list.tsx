@@ -12,6 +12,7 @@ import {
   Watch,
 } from "@stencil/core";
 import Sortable from "sortablejs";
+import { focusElement } from "../../utils/dom";
 import {
   connectInteractive,
   disconnectInteractive,
@@ -27,12 +28,19 @@ import {
 import { connectLocalized, disconnectLocalized, LocalizedComponent } from "../../utils/locale";
 import { createObserver } from "../../utils/observers";
 import {
+  connectSortableComponent,
+  disconnectSortableComponent,
+  dragActive,
+  SortableComponent,
+} from "../../utils/sortableComponent";
+import {
   connectMessages,
   disconnectMessages,
   setUpMessages,
   T9nComponent,
   updateMessages,
 } from "../../utils/t9n";
+import { DragDetail } from "../interfaces";
 import {
   calciteInternalListItemValueChangeHandler,
   calciteListFocusOutHandler,
@@ -61,14 +69,6 @@ import { ListItemAndHandle } from "../value-list-item/interfaces";
 import { ValueListMessages } from "./assets/value-list/t9n";
 import { CSS, ICON_TYPES } from "./resources";
 import { getHandleAndItemElement, getScreenReaderText } from "./utils";
-import {
-  DragDetail,
-  connectSortableComponent,
-  disconnectSortableComponent,
-  SortableComponent,
-  dragActive,
-} from "../../utils/sortableComponent";
-import { focusElement } from "../../utils/dom";
 
 /**
  * @deprecated Use the `list` component instead.

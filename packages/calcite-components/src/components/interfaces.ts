@@ -17,6 +17,15 @@ export type SelectionMode =
   | "multichildren"
   | "ancestors"
   | "multiple";
+
 export type Scale = "s" | "m" | "l";
 export type Status = "invalid" | "valid" | "idle";
 export type Width = "auto" | "half" | "full";
+
+export interface DragDetail {
+  toEl: HTMLElement;
+  fromEl: HTMLElement;
+  dragEl: HTMLElement;
+  newIndex: number;
+  oldIndex: number;
+}

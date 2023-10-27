@@ -1,13 +1,6 @@
 import Sortable from "sortablejs";
+import { DragDetail } from "../components/interfaces";
 const sortableComponentSet = new Set<SortableComponent>();
-
-export interface DragDetail {
-  toEl: HTMLElement;
-  fromEl: HTMLElement;
-  dragEl: HTMLElement;
-  newIndex: number;
-  oldIndex: number;
-}
 
 export const CSS = {
   ghostClass: "calcite-sortable--ghost",
