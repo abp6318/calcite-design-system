@@ -1,0 +1,6 @@
+/*!
+ * All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+ * See https://github.com/Esri/calcite-design-system/blob/main/LICENSE.md for details.
+ * v1.10.0-next.9
+ */
+import{d as _}from"./p-973faa32.js";import"./p-a2b8d6f6.js";import"./p-623bd617.js";import"./p-d2216e3b.js";import"./p-9c138760.js";import"./p-f8ee0d71.js";import"./p-2e1b2031.js";import"./p-3f10228f.js";import"./p-6294fd29.js";import"./p-cbd4dd1e.js";import"./p-dca33159.js";import"./p-2bc2c05a.js";import"./p-0c0a5f97.js";import"./p-4f05830a.js";import"./p-b660b11c.js";import"./p-d2980760.js";import"./p-756d283a.js";import"./p-90c940c9.js";var m={name:"ja",weekdays:"日曜日_月曜日_火曜日_水曜日_木曜日_金曜日_土曜日".split("_"),weekdaysShort:"日_月_火_水_木_金_土".split("_"),weekdaysMin:"日_月_火_水_木_金_土".split("_"),months:"1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),monthsShort:"1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),ordinal:function(_){return _+"日"},formats:{LT:"HH:mm",LTS:"HH:mm:ss",L:"YYYY/MM/DD",LL:"YYYY年M月D日",LLL:"YYYY年M月D日 HH:mm",LLLL:"YYYY年M月D日 dddd HH:mm",l:"YYYY/MM/DD",ll:"YYYY年M月D日",lll:"YYYY年M月D日 HH:mm",llll:"YYYY年M月D日(ddd) HH:mm"},meridiem:function(_){return _<12?"午前":"午後"},relativeTime:{future:"%s後",past:"%s前",s:"数秒",m:"1分",mm:"%d分",h:"1時間",hh:"%d時間",d:"1日",dd:"%d日",M:"1ヶ月",MM:"%dヶ月",y:"1年",yy:"%d年"}};_.locale(m,null,!0);export default m;
